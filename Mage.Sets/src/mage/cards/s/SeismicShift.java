@@ -38,6 +38,7 @@ import mage.constants.Duration;
 import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetpointer.SecondTargetPointer;
 
 /**
  *
@@ -52,8 +53,8 @@ public class SeismicShift extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_LAND));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         //Up to two target creatures can't block this turn.
-        this.getSpellAbility().addEffect(new CantBlockTargetEffect(Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 2));
+        this.getSpellAbility().addEffect(new CantBlockTargetEffect(Duration.EndOfTurn).setTargetPointer(new SecondTargetPointer()));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 2, StaticFilters.FILTER_PERMANENT_CREATURES, false));
     }
 
     public SeismicShift(final SeismicShift card) {
